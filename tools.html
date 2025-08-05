@@ -1,0 +1,144 @@
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>البرامج الحسابية - آلاء جلال</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(-45deg, #f8bbd0, #fce4ec, #f3e5f5, #f9d5ec);
+      background-size: 400% 400%;
+      animation: gradient 10s ease infinite;
+      color: #4a148c;
+      text-align: center;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      padding: 30px 10px 10px;
+    }
+
+    .tool {
+      background-color: #fff0f5;
+      margin: 20px auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    button {
+      background-color: #ce93d8;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ab47bc;
+    }
+
+    .result {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    a.back {
+      display: inline-block;
+      margin: 30px auto;
+      padding: 10px 20px;
+      background-color: #ce93d8;
+      color: white;
+      border-radius: 25px;
+      text-decoration: none;
+    }
+
+    a.back:hover {
+      background-color: #ab47bc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>البرامج الحسابية 🧮</h1>
+
+  <!-- حجم الأسطوانة -->
+  <div class="tool">
+    <h3>حساب حجم الأسطوانة</h3>
+    <input type="number" id="radius1" placeholder="نصف القطر">
+    <input type="number" id="height1" placeholder="الارتفاع">
+    <button onclick="calcCylinder()">احسب</button>
+    <div class="result" id="cylinderResult"></div>
+  </div>
+
+  <!-- مساحة الدائرة -->
+  <div class="tool">
+    <h3>حساب مساحة الدائرة</h3>
+    <input type="number" id="radius2" placeholder="نصف القطر">
+    <button onclick="calcCircle()">احسب</button>
+    <div class="result" id="circleResult"></div>
+  </div>
+
+  <!-- معادلة الدرجة الثانية -->
+  <div class="tool">
+    <h3>حل معادلة من الدرجة الثانية</h3>
+    <input type="number" id="a" placeholder="المعامل a">
+    <input type="number" id="b" placeholder="المعامل b">
+    <input type="number" id="c" placeholder="المعامل c">
+    <button onclick="solveQuadratic()">احسب</button>
+    <div class="result" id="quadraticResult"></div>
+  </div>
+
+  <a class="back" href="index.html">🔙 العودة للرئيسية</a>
+
+  <script>
+    function calcCylinder() {
+      const r = parseFloat(document.getElementById("radius1").value);
+      const h = parseFloat(document.getElementById("height1").value);
+      if (isNaN(r) || isNaN(h)) return;
+      const volume = Math.PI * r * r * h;
+      document.getElementById("cylinderResult").textContent = "الحجم: " + volume.toFixed(2);
+    }
+
+    function calcCircle() {
+      const r = parseFloat(document.getElementById("radius2").value);
+      if (isNaN(r)) return;
+      const area = Math.PI * r * r;
+      document.getElementById("circleResult").textContent = "المساحة: " + area.toFixed(2);
+    }
+
+    function solveQuadratic() {
+      const a = parseFloat(document.getElementById("a").value);
+      const b = parseFloat(document.getElementById("b").value);
+      const c = parseFloat(document.getElementById("c").value);
+      if (isNaN(a) || isNaN(b) || isNaN(c)) return;
+
+      const d = b * b - 4 * a * c;
+      if (d < 0) {
+        document.getElementById("quadraticResult").textContent = "لا يوجد حل حقيقي.";
+      } else {
+        const x1 = (-b + Math.sqrt(d)) / (2 * a);
+        const x2 = (-b - Math.sqrt(d)) / (2 * a);
+        document.getElementById("quadraticResult").textContent = `الحل x1 = ${x1.toFixed(2)}, x2 = ${x2.toFixed(2)}`;
+      }
+    }
+  </script>
+
+</body>
+</html>
